@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Braise & Saveurs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0c08;
+    --surface: #1c1710;
+    --surface2: #252015;
+    --ember: #e8601c;
+    --ember-light: #f0874a;
+    --gold: #c8963a;
+    --text: #f2ead8;
+    --muted: #a09070;
+    --border: rgba(200,150,58,0.18);
+  }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem 3rem;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse at center, rgba(232,96,28,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 0 2rem;
+    gap: 1rem;
+  }
+
+  .avatar-wrap {
+    position: relative;
+  }
+
+  .avatar-ring {
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    opacity: 0.6;
+  }
+
+  .avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .avatar-placeholder {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    color: var(--text);
+    text-align: center;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+  }
+
+  .tagline {
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: 0.04em;
+    max-width: 280px;
+    line-height: 1.6;
+  }
+
+  .divider-flame {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0.5rem 0 1.5rem;
+    width: 100%;
+    max-width: 320px;
+    align-self: center;
+  }
+
+  .divider-flame::before,
+  .divider-flame::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .flame-icon {
+    font-size: 1rem;
+    opacity: 0.7;
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    padding-left: 2px;
+  }
+
+  .section {
+    margin-bottom: 2rem;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  a.btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: background 0.18s, border-color 0.18s, transform 0.12s;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  a.btn:hover, a.btn:focus {
+    background: var(--surface2);
+    border-color: rgba(200,150,58,0.35);
+    outline: none;
+  }
+
+  a.btn:active {
+    transform: scale(0.98);
+  }
+
+  a.btn.primary {
+    background: var(--ember);
+    border-color: transparent;
+    color: #fff;
+  }
+
+  a.btn.primary:hover {
+    background: var(--ember-light);
+  }
+
+  .btn-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+  }
+
+  a.btn.primary .btn-icon {
+    background: rgba(255,255,255,0.2);
+  }
+
+  a.btn:not(.primary) .btn-icon {
+    background: var(--surface2);
+  }
+
+  .btn-text {
+    flex: 1;
+  }
+
+  .btn-title {
+    display: block;
+    font-weight: 500;
+  }
+
+  .btn-sub {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 1px;
+  }
+
+  a.btn.primary .btn-sub {
+    color: rgba(255,255,255,0.7);
+  }
+
+  .btn-arrow {
+    font-size: 1rem;
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  .footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .footer a {
+    color: var(--gold);
+    text-decoration: none;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="avatar-wrap">
+      <div class="avatar-ring"></div>
+      <div class="avatar-placeholder">🔥</div>
+    </div>
+    <h1 class="brand-name">Braise &amp; Saveurs</h1>
+    <p class="tagline">Traiteur événementiel au brasero · Lot &amp; alentours · Marvin et Brice</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Nous contacter</div>
+    <div class="links">
+      <a class="btn primary" href="mailto:braise.saveurs@gmail.com?subject=Demande de devis">
+        <div class="btn-icon">✉️</div>
+        <div class="btn-text">
+          <span class="btn-title">Demander un devis</span>
+          <span class="btn-sub">braise.saveurs@gmail.com</span>
+        </div>
+        <span class="btn-arrow">›</span>
+      </a>
+      <a class="btn" href="tel:+33606732282">
+        <div class="btn-icon">📞</div>
+        <div class="btn-text">
+          <span class="btn-title">Appeler Marvin</span>
+          <span class="btn-sub">06 06 73 22 82</span>
+        </div>
+        <span class="btn-arrow">›</span>
+      </a>
+      <a class="btn" href="tel:+33632692594">
+        <div class="btn-icon">📞</div>
+        <div class="btn-text">
+          <span class="btn-title">Appeler Brice</span>
+          <span class="btn-sub">06 32 69 25 94</span>
+        </div>
+        <span class="btn-arrow">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="divider-flame">
+    <span class="flame-icon">🔥</span>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Nous suivre</div>
+    <div class="links">
+      <a class="btn" href="https://www.instagram.com/braise.et.saveurs" target="_blank" rel="noopener">
+        <div class="btn-icon">📸</div>
+        <div class="btn-text">
+          <span class="btn-title">Instagram</span>
+          <span class="btn-sub">@braise.et.saveurs</span>
+        </div>
+        <span class="btn-arrow">›</span>
+      </a>
+      <a class="btn" href="https://www.facebook.com/513932298471982" target="_blank" rel="noopener">
+        <div class="btn-icon">📘</div>
+        <div class="btn-text">
+          <span class="btn-title">Facebook</span>
+          <span class="btn-sub">Braise &amp; Saveurs</span>
+        </div>
+        <span class="btn-arrow">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Infos pratiques</div>
+    <div class="links">
+      <a class="btn" href="https://maps.app.goo.gl/6Je9y9co1GpUCKM69" target="_blank" rel="noopener">
+        <div class="btn-icon">📍</div>
+        <div class="btn-text">
+          <span class="btn-title">Zone d'intervention</span>
+          <span class="btn-sub">Lot (46) et départements alentours</span>
+        </div>
+        <span class="btn-arrow">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>© 2025 Braise &amp; Saveurs</p>
+  </div>
+</div>
+
+</body>
+</html>
